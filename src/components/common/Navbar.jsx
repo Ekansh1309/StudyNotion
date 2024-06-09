@@ -17,7 +17,10 @@ function Navbar() {
   const { totalItems } = useSelector((state) => state.cart)
   const location = useLocation()
 
-  const [subLinks, setSubLinks] = useState([])
+
+  const [subLinks, setSubLinks] = useState([
+    {name:"AI ML"},{name:"Web Development"},{name:"Android Development"}
+  ])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -25,7 +28,7 @@ function Navbar() {
       setLoading(true)
       try {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
-        setSubLinks(res.data.data)
+        // setSubLinks(res.data.data)
       } catch (error) {
         console.log("Could not fetch Categories.", error)
       }
@@ -70,13 +73,9 @@ function Navbar() {
                         <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
                         {loading ? (
                           <p className="text-center">Loading...</p>
-                        ) : (Array.isArray(subLinks) && subLinks.length > 0) ? (
+                        ) : ( subLinks.length > 0) ? (
                           <>
-                            {subLinks
-                              ?.filter(
-                                (subLink) => subLink?.courses?.length > 0
-                              )
-                              ?.map((subLink, i) => (
+                            {subLinks?.map((subLink, i) => (
                                 <Link
                                   to={`/catalog/${subLink.name
                                     .split(" ")
