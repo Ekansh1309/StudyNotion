@@ -7,15 +7,20 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/free-mode"
 import "swiper/css/pagination"
+import 'swiper/css/autoplay';
+import 'swiper/css/navigation';
+
 import "../../App.css"
 // Icons
 import { FaStar } from "react-icons/fa"
 // Import required modules
-import { Autoplay, FreeMode, Pagination } from "swiper"
+import { Autoplay, FreeMode, Pagination,Navigation, Scrollbar, A11y } from "swiper"
+// import { Navigation, Pagination, Scrollbar, A11y } from '../../../node_modules/swiper/modules';
 
 // Get apiFunction and the endpoint
 import { apiConnector } from "../../services/apiconnector"
 import { ratingsEndpoints } from "../../services/apis"
+
 
 function ReviewSlider() {
   const [reviews, setReviews] = useState([])
@@ -27,6 +32,7 @@ function ReviewSlider() {
         "GET",
         ratingsEndpoints.REVIEWS_DETAILS_API
       )
+      // console.log("Reviews are ",data)
       if (data?.success) {
         setReviews(data?.data)
       }
@@ -38,19 +44,25 @@ function ReviewSlider() {
   return (
     <div className="text-white">
       <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent">
+        
         <Swiper
-          slidesPerView={4}
-          spaceBetween={25}
-          loop={true}
-          freeMode={true}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          modules={[FreeMode, Pagination, Autoplay]}
-          className="w-full "
-        >
-          {reviews.map((review, i) => {
+        // SlidesPerView * 2 ke liye work krta hai
+        slidesPerView={1}
+        spaceBetween={30}
+        freeMode={true}
+        loop={true}
+        // pagination={{
+        //   clickable: true,
+        // }}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+        }}
+        modules={[FreeMode, Pagination,Autoplay]}
+        className="mySwiper"
+      >
+
+{reviews.map((review, i) => {
             return (
               <SwiperSlide key={i}>
                 <div className="flex flex-col gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25">
@@ -97,8 +109,9 @@ function ReviewSlider() {
               </SwiperSlide>
             )
           })}
-          {/* <SwiperSlide>Slide 1</SwiperSlide> */}
-        </Swiper>
+
+      </Swiper>
+
       </div>
     </div>
   )

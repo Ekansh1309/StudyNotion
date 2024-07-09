@@ -62,7 +62,7 @@ function CourseDetails() {
     setIsActive(
       !isActive.includes(id)
         ? isActive.concat([id])
-        : isActive.filter((e) => e != id)
+        : isActive.filter((e) => e !== id)
     )
   }
 
@@ -180,6 +180,7 @@ function CourseDetails() {
               <button className="blackButton">Add to Cart</button>
             </div>
           </div>
+          
           {/* Courses Card */}
           <div className="right-[1rem] top-[60px] mx-auto hidden min-h-[600px] w-1/3 max-w-[410px] translate-y-24 md:translate-y-0 lg:absolute  lg:block">
             <CourseDetailsCard
@@ -201,7 +202,7 @@ function CourseDetails() {
           </div>
 
           {/* Course Content Section */}
-          <div className="max-w-[830px] ">
+          <div className="max-w-[830px] border-2 border-pink-50">
             <div className="flex flex-col gap-3">
               <p className="text-[28px] font-semibold">Course Content</p>
               <div className="flex flex-wrap justify-between gap-2">

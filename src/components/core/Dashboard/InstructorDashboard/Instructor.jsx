@@ -11,30 +11,67 @@ export default function Instructor() {
     const [loading, setLoading] = useState(false)
     const [instructorData, setInstructorData] = useState(null)
     const [courses, setCourses] = useState([])
+    const [totalStudents, setTotalStudents] = useState(0);
+    const [totalAmount, setTotalAmount] = useState(0);
+
   
     useEffect(() => {
       ;(async () => {
         setLoading(true)
         const instructorApiData = await getInstructorData(token)
+        console.log("Get Instructor data ", instructorApiData)
+        // 
         const result = await fetchInstructorCourses(token)
-        console.log(instructorApiData)
-        if (instructorApiData.length) setInstructorData(instructorApiData)
+        console.log("Fetch Instructor Courses data ", result)
+        if (instructorApiData.length) {
+          setInstructorData(instructorApiData)
+        }
         if (result) {
           setCourses(result)
         }
+        // const calcTotalAmount = instructorData?.reduce(
+        //   (acc, curr) => acc + curr.totalAmountGenerated,
+        //   0
+        // )
+        
+
+        
+
+        // console.log("Students ",calcTotalStudents)
+        // setTotalStudents(calcTotalStudents)
+
+        // const calcTotalStudents = instructorData?.reduce(
+        //   (acc, curr) => acc + curr.totalStudentsEnrolled,
+        //   0
+        // )
+        // setTotalAmount(calcTotalAmount)
+        // console.log("Students ",calcTotalStudents)
         setLoading(false)
       })()
     }, [])
   
-    const totalAmount = instructorData?.reduce(
-      (acc, curr) => acc + curr.totalAmountGenerated,
-      0
-    )
+    // const totalAmount = instructorData?.reduce(
+    //   (acc, curr) => acc + curr.totalAmountGenerated,
+    //   0
+    // )
   
-    const totalStudents = instructorData?.reduce(
-      (acc, curr) => acc + curr.totalStudentsEnrolled,
-      0
-    )
+    // const totalStudents = instructorData?.reduce(
+    //   (acc, curr) => acc + curr.totalStudentsEnrolled,
+    //   0
+    // )
+
+    useEffect(()=>{ 
+
+      let calcTotalStudents=0;
+      let calcTotalAmount=0;
+      instructorData?.forEach(ele => {
+        calcTotalStudents += ele.totalStudentsEnrolled
+        calcTotalAmount += ele.totalAmountGenerated
+      });
+
+      setTotalStudents(calcTotalStudents)
+      setTotalAmount(calcTotalAmount)
+    },[courses])
   
     return (
       <div>
@@ -109,7 +146,7 @@ export default function Instructor() {
                       </p>
                       <div className="mt-1 flex items-center space-x-2">
                         <p className="text-xs font-medium text-richblack-300">
-                          {course.studentsEnroled.length} students
+                          {course.studentsEnrolled.length} students
                         </p>
                         <p className="text-xs font-medium text-richblack-300">
                           |

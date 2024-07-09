@@ -14,7 +14,10 @@ export default function CourseAccordionBar({ course, isActive, handleActive }) {
   const [sectionHeight, setSectionHeight] = useState(0)
   useEffect(() => {
     setSectionHeight(active ? contentEl.current.scrollHeight : 0)
+    // console.log("Height is ",sectionHeight)
   }, [active])
+
+  
 
   return (
     <div className="overflow-hidden border border-solid border-richblack-600 bg-richblack-700 text-richblack-5 last:mb-0">
@@ -42,9 +45,10 @@ export default function CourseAccordionBar({ course, isActive, handleActive }) {
           </div>
         </div>
       </div>
+      
       <div
         ref={contentEl}
-        className={`relative h-0 overflow-hidden bg-richblack-900 transition-[height] duration-[0.35s] ease-[ease]`}
+        className={`relative h-0 border-2 border-pink-100 overflow-hidden bg-richblack-900 transition-[height] duration-[0.35s] ease-[ease]`}
         style={{
           height: sectionHeight,
         }}

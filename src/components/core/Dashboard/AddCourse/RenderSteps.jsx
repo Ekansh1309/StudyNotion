@@ -48,6 +48,8 @@ export default function RenderSteps() {
               </button>
               
             </div>
+
+            {/* dotted lines */}
             {item.id !== steps.length && (
               <>
                 <div
