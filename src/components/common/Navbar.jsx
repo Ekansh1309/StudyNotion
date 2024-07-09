@@ -18,10 +18,10 @@ function Navbar() {
   const location = useLocation()
 
 
-  // const [subLinks, setSubLinks] = useState([
-  //   {name:"AI ML"},{name:"Web Development"},{name:"Android Development"}
-  // ])
-  const [subLinks, setSubLinks] = useState([])
+  const [subLinks, setSubLinks] = useState([
+    {name:"Web Dev"}
+  ])
+  // const [subLinks, setSubLinks] = useState([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
