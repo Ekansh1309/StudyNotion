@@ -59,7 +59,7 @@ const Footer = () => {
               <h1 className="text-richblack-50 font-semibold text-[16px]">
                 Resources
               </h1>
-
+    
               <div className="flex flex-col gap-2 mt-2">
                 {Resources.map((ele, index) => {
                   return (
