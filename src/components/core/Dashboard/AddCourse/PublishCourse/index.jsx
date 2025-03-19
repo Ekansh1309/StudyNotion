@@ -87,6 +87,8 @@ export default function PublishCourse() {
         {/* Next Prev Button */}
         <div className="ml-auto flex max-w-max items-center gap-x-4">
           <button
+            // jab tak humari loading ki value true ho tab tak ye button click naa ho paaye ya iss
+            // button se koi action naa le paau
             disabled={loading}
             type="button"
             onClick={goBack}

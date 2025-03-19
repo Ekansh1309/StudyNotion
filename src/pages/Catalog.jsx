@@ -31,6 +31,7 @@ const Catalog = () => {
     useEffect(() => {
         const getCategoryDetails = async() => {
             try{
+               console.log("Category id ",categoryId)
                 const res = await getCatalogaPageData(categoryId);
                 console.log("PRinting res: ", res);
                 setCatalogPageData(res);
@@ -78,7 +79,7 @@ const Catalog = () => {
           </div>
     
           {/* Section 1 */}
-          <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+          <div className=" mx-auto  box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
             <div className="section_heading">Courses to get you started</div>
             <div className="my-4 flex border-b border-b-richblack-600 text-sm">
               <p
@@ -102,12 +103,13 @@ const Catalog = () => {
                 New
               </p>
             </div>
-            <div>
+            <div className=''>
               <CourseSlider
                 Courses={catalogPageData?.data?.selectedCategory?.courses}
               />
             </div>
           </div>
+
           {/* Section 2 */}
           <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
             <div className="section_heading">

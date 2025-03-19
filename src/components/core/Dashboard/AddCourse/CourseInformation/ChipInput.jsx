@@ -42,6 +42,9 @@ export default function ChipInput({
       event.preventDefault()
       // Get the input value and remove any leading/trailing spaces
       const chipValue = event.target.value.trim()
+
+      // check for after spaces
+      
       // Check if the input value exists and is not already in the chips array
       if (chipValue && !chips.includes(chipValue)) {
         // Add the chip to the array and clear the input

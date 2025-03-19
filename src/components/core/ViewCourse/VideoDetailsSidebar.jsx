@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 import { BsChevronDown } from "react-icons/bs"
 import { IoIosArrowBack } from "react-icons/io"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 
 import IconBtn from "../../common/IconBtn"
+import { setCompletedLectures, updateCompletedLectures } from "../../../slices/viewCourseSlice"
 
 export default function VideoDetailsSidebar({ setReviewModal }) {
   const [activeStatus, setActiveStatus] = useState("")
@@ -12,12 +13,24 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
   const navigate = useNavigate()
   const location = useLocation()
   const { sectionId, subSectionId } = useParams()
+  const dispatch = useDispatch();
   const {
     courseSectionData,
     courseEntireData,
     totalNoOfLectures,
     completedLectures,
   } = useSelector((state) => state.viewCourse)
+
+  const handleCheckboxChange = (topicId) => {
+      if (completedLectures.includes(topicId)) {
+          // Remove from completed lectures
+          const updatedLectures = completedLectures.filter(id => id !== topicId);
+          dispatch(setCompletedLectures(updatedLectures));
+      } else {
+          // Add to completed lectures
+          dispatch(updateCompletedLectures(topicId));
+      }
+  };
 
   useEffect(() => {
     ;(() => {
@@ -70,7 +83,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
           {courseSectionData.map((course, index) => (
             <div
               className="mt-2 cursor-pointer text-sm text-richblack-5"
-              onClick={() => setActiveStatus(course?._id)}
+              onClick={() => setActiveStatus(course?._id)}   // idhar id set kr rha hoon
               key={index}
             >
               {/* Section */}
@@ -84,7 +97,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                   </span> */}
                   <span
                     className={`${
-                      activeStatus === course?.sectionName
+                      activeStatus === course?._id  // yahan name set ho rha hai
                         ? "rotate-0"
                         : "rotate-180"
                     } transition-all duration-500`}
@@ -114,11 +127,13 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                     >
                       <input
                         type="checkbox"
-                        checked={completedLectures.includes(topic?._id)}
-                        onChange={() => {}}
+                        checked={completedLectures.includes(topic?._id)} 
+                        onChange={() => {}} // if used then, bina lecture dekhe tick ho jayega
                       />
+                      
                       {topic.title}
                     </div>
+                    // handleCheckboxChange(topic?._id) // can be used above
                   ))}
                 </div>
               )}
