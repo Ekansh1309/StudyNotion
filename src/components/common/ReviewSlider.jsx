@@ -36,7 +36,6 @@ function ReviewSlider() {
         ratingsEndpoints.REVIEWS_DETAILS_API
       )
       // console.log("Reviews are ",data)
-      // console.log("Reviews are ",data)
       if (data?.success) {
         setReviews(data?.data)
       }
@@ -66,23 +65,6 @@ function ReviewSlider() {
   
         }}
         autoplay={{ delay: 2000, disableOnInteraction: false }}
-        modules={[FreeMode, Pagination,Autoplay]}
-        className="mySwiper"
-      >
-
-{reviews.map((review, i) => {
-        // SlidesPerView * 2 ke liye work krta hai
-        slidesPerView={1}
-        spaceBetween={30}
-        freeMode={true}
-        loop={true}
-        // pagination={{
-        //   clickable: true,
-        // }}
-        autoplay={{
-          delay: 2000,
-          disableOnInteraction: false,
-        }}
         modules={[FreeMode, Pagination,Autoplay]}
         className="mySwiper"
       >
